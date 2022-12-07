@@ -7,11 +7,8 @@ public class BallController : MonoBehaviour
 	[SerializeField] private float moveForce = 5;
 	[SerializeField] private float jumpForce = 2;
 	[SerializeField] private float maxAngularVelocity = 15;
-	private bool needsTorque = true;
-	private const float DistFromGround = 1f;
+	private const float distFromGround = 1f;
 
-	private Vector3 camerasDirection;
-	private Vector3 action;
 	private new Rigidbody rigidbody;
 
 	private void Awake()
@@ -22,13 +19,13 @@ public class BallController : MonoBehaviour
 
 	private void Start()
 	{
-		GameManager.Instance.InputController.OnJump += OnJump;
+		GameManager.Instance.InputController.OnJump += Jump;
 		Camera.main.GetComponent<CameraController>().target = transform;
 	}
 
-	void OnJump()
+	void Jump()
     {
-		if (Physics.Raycast(transform.position, -Vector3.up, DistFromGround))
+		if (Physics.Raycast(transform.position, -Vector3.up, distFromGround))
 		{
 			rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 		}
@@ -37,7 +34,14 @@ public class BallController : MonoBehaviour
 	void FixedUpdate()
 	{
 		var direction = (GameManager.Instance.InputController.VerticalAxis * Vector3.forward + GameManager.Instance.InputController.HorisontalAxis * Vector3.right).normalized;
-		rigidbody.AddTorque(new Vector3(direction.z, 0, -direction.x) * moveForce);
+		if (Physics.Raycast(transform.position, -Vector3.up, 0.55f)) //if on ground
+		{
+			rigidbody.AddTorque(new Vector3(direction.z, 0, -direction.x) * moveForce);
+        }
+        else
+        {
+			rigidbody.AddForce(new Vector3(direction.z, 0, -direction.x) * moveForce);
+		}
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -50,6 +54,6 @@ public class BallController : MonoBehaviour
 
     private void OnDestroy()
     {
-		GameManager.Instance.InputController.OnJump -= OnJump;
+		GameManager.Instance.InputController.OnJump -= Jump;
 	}
 }

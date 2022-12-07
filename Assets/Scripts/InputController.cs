@@ -16,6 +16,7 @@ public class InputController
     public Action OnJump;
     public float HorisontalAxis { get; private set; }
     public float VerticalAxis { get; private set; }
+    private EventSystem eventSystem;
 
     private InputModeType inputModeType;
     public InputModeType InputModeType
@@ -24,13 +25,14 @@ public class InputController
         set 
         { 
             inputModeType = value;
-            EventSystem.current.enabled = value == InputModeType.UI; //enables ui raycasts
+            eventSystem.enabled = value == InputModeType.UI; //enables ui raycasts
         }
     }
 
     public InputController()
     {
         GameManager.Instance.OnUpdate += Update;
+        eventSystem = EventSystem.current;
     }
 
     private void Update()
