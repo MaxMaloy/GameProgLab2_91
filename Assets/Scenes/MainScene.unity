@@ -1170,6 +1170,7 @@ MonoBehaviour:
   target: {fileID: 0}
   smoothSpeed: 0.125
   offset: {x: 0, y: 3, z: -2}
+  isFollowing: 0
 --- !u!1 &969526077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1559,7 @@ MonoBehaviour:
   - level1
   - level2
   - level3
+  currentScene: 
 --- !u!1 &1164167269
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
     public InputController InputController { get; private set; }
-    public SceneManager SceneManager { get; private set; }
+    public GameSceneManager SceneManager { get; private set; }
     public UIController UIController { get => uiController; }
 
     private void Awake()
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
 
         InputController = new InputController();
-        SceneManager = GetComponent<SceneManager>();
+        SceneManager = GetComponent<GameSceneManager>();
     }
 
     private void Start()

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class BallController : MonoBehaviour
 {
@@ -15,12 +16,15 @@ public class BallController : MonoBehaviour
 	{
 		rigidbody = GetComponent<Rigidbody>();
 		rigidbody.maxAngularVelocity = maxAngularVelocity;
+		GameManager.Instance.OnFixedUpdate += FixedUpd;
 	}
 
 	private void Start()
 	{
 		GameManager.Instance.InputController.OnJump += Jump;
-		Camera.main.GetComponent<CameraController>().target = transform;
+		var cameraController = Camera.main.GetComponent<CameraController>();
+		cameraController.target = transform;
+		cameraController.isFollowing = true;
 	}
 
 	void Jump()
@@ -31,7 +35,7 @@ public class BallController : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
+	void FixedUpd()
 	{
 		var direction = (GameManager.Instance.InputController.VerticalAxis * Vector3.forward + GameManager.Instance.InputController.HorisontalAxis * Vector3.right).normalized;
 		if (Physics.Raycast(transform.position, -Vector3.up, 0.55f)) //if on ground
@@ -41,6 +45,16 @@ public class BallController : MonoBehaviour
         else
         {
 			rigidbody.AddForce(new Vector3(direction.z, 0, -direction.x) * moveForce);
+		}
+
+		if (!Physics.Raycast(transform.position, -Vector3.up, 100f)) //if falling
+		{
+			Debug.Log("Play falling anim and restart level");
+			GameManager.Instance.OnFixedUpdate -= FixedUpd;
+			Sequence sequence = DOTween.Sequence();
+			sequence.InsertCallback(.5f, ()=>Camera.main.GetComponent<CameraController>().isFollowing = false);
+			sequence.InsertCallback(3f, GameManager.Instance.SceneManager.ReloadScene);
+		
 		}
 	}
 
@@ -55,5 +69,6 @@ public class BallController : MonoBehaviour
     private void OnDestroy()
     {
 		GameManager.Instance.InputController.OnJump -= Jump;
+		GameManager.Instance.OnFixedUpdate -= FixedUpd;
 	}
 }
