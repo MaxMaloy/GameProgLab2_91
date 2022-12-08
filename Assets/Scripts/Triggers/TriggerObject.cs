@@ -10,7 +10,7 @@ public class TriggerObject : MonoBehaviour
         gameObject.tag = "Trigger";
     }
 
-    public virtual void OnTriggered()
+    public virtual void OnTriggered(BallController ballController)
     {
         Debug.Log("Triggered");
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8882489591297577106}
   - component: {fileID: 8882489591297577107}
   - component: {fileID: 8882489591297577104}
-  - component: {fileID: 8882489591297577105}
+  - component: {fileID: -3799879788651747243}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8882489591297577105
+--- !u!114 &-3799879788651747243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,6 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f23a77165c7f049ac5b707eda13f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 5
-  jumpForce: 2
+  woodenMaterial: {fileID: 2100000, guid: a63b216b1ea4aea43a078f19efb60842, type: 2}
+  stoneMaterial: {fileID: 2100000, guid: c96fb1b59e2e4574ea737355ab10e80b, type: 2}
   maxAngularVelocity: 15

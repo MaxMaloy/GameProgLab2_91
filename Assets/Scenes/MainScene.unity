@@ -1526,7 +1526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 1029622204}
-  ballController: {fileID: 8882489591297577105, guid: fd272237fa7f4094ca44136fbf157ff7, type: 3}
+  ballController: {fileID: -3799879788651747243, guid: fd272237fa7f4094ca44136fbf157ff7, type: 3}
 --- !u!4 &1119881161
 Transform:
   m_ObjectHideFlags: 0
