@@ -39,9 +39,9 @@ public class WoodenBallParameters : IBallParameters
 public class StoneBallParameters : IBallParameters
 {
     private BallType type = BallType.stone;
-    private float moveForce = 7;
+    private float moveForce = 10;
     private float jumpForce = 0;
-    private float mass = 3;
+    private float mass = 4;
     public BallType Type { get => type; set => type = value; }
     public float MoveForce { get => moveForce; set => moveForce = value; }
     public float JumpForce { get => jumpForce; set => jumpForce = value; }

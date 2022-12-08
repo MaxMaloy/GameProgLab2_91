@@ -69,21 +69,9 @@ public class BallController : MonoBehaviour
         {
 			rigidbody.AddForce(new Vector3(direction.z, 0, -direction.x) * currentBallParams.MoveForce);
 		}
-
-		if (!Physics.Raycast(transform.position, -Vector3.up, 100f)) //if falling
-		{
-			Debug.Log("Play falling anim and restart level");
-			GameManager.Instance.LivesCount--;
-			GameManager.Instance.OnFixedUpdate -= FixedUpd;
-			Sequence sequence = DOTween.Sequence();
-			sequence.InsertCallback(.5f, () => Camera.main.GetComponent<CameraController>().isFollowing = false);
-			if (GameManager.Instance.LivesCount > 0)
-            {
-				sequence.InsertCallback(3f, GameManager.Instance.SceneManager.ReloadScene);
-			}
-			
-		}
 	}
+
+
 
 	void OnTriggerEnter(Collider collider)
 	{

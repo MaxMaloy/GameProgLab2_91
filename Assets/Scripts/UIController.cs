@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RectTransform timerContainer;
     [SerializeField] private RectTransform escContainer;
     [SerializeField] private RectTransform menu;
+    [SerializeField] private RectTransform loosePopup;
     [SerializeField] private TMPro.TextMeshProUGUI coins;
     private bool isMenuVisible = true;
 
@@ -19,6 +20,7 @@ public class UIController : MonoBehaviour
     {
         SetHudVisibility(false, 0);
         SetMenuVisibility(false, 0);
+        SetLoosePopupVisibility(false, 0);
     }
 
     public void SetHudVisibility(bool visibility, float animSpeed = 1)
@@ -45,6 +47,13 @@ public class UIController : MonoBehaviour
         menu.DOScale(visibility ? 1 : 0, 0.5f * animSpeed).SetEase(Ease.OutBounce).OnComplete(()=>GameManager.Instance.InputController.InputModeType = visibility ? InputModeType.UI : InputModeType.Gameplay);
     }
 
+    public void SetLoosePopupVisibility(bool visibility, float animSpeed = 1)
+    {
+        SetHudVisibility(!visibility, .5f);
+        GameManager.Instance.InputController.InputModeType = InputModeType.Blocked;
+        loosePopup.DOScale(visibility ? 1 : 0, 0.5f * animSpeed).SetEase(Ease.OutBounce).OnComplete(() => GameManager.Instance.InputController.InputModeType = visibility ? InputModeType.UI : InputModeType.Gameplay);
+    }
+
     public void ContinueMenuButton()
     {
         SetMenuVisibility(false);
@@ -69,5 +78,17 @@ public class UIController : MonoBehaviour
     public void SetCoinsCount(int count)
     {
         coins.text = $"{count}/10";
+    }
+
+    public void OnLooseWatchAd()
+    {
+        SetLoosePopupVisibility(false, 0);
+    }
+
+    public void OnLooseFromBeginning()
+    {
+        GameManager.Instance.SceneManager.LoadScene("level1");
+        GameManager.Instance.LivesCount = 3;
+        SetLoosePopupVisibility(false);
     }
 }
