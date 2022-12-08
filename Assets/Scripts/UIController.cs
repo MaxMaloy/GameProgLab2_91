@@ -8,13 +8,12 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private RectTransform livesContainer;
+    [SerializeField] private List<RectTransform> lives;
     [SerializeField] private RectTransform timerContainer;
     [SerializeField] private RectTransform escContainer;
     [SerializeField] private RectTransform menu;
+    [SerializeField] private TMPro.TextMeshProUGUI coins;
     private bool isMenuVisible = true;
-
-    [SerializeField] private List<Image> hearts;
-    [SerializeField] private TextMeshProUGUI timer;
 
     private void Awake()
     {
@@ -57,5 +56,18 @@ public class UIController : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    public void SetLivesCount(int count)
+    {
+        for (int i = 0; i < lives.Count; i++)
+        {
+            lives[i].gameObject.SetActive(i < count);
+        }
+    }
+
+    public void SetCoinsCount(int count)
+    {
+        coins.text = $"{count}/10";
     }
 }
