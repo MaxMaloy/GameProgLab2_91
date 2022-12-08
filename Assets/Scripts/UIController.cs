@@ -40,13 +40,22 @@ public class UIController : MonoBehaviour
         {
             return;
         }
+        SetHudVisibility(!visibility, .5f);
         isMenuVisible = visibility;
         GameManager.Instance.InputController.InputModeType = InputModeType.Blocked;
-        menu.DOScale(visibility ? 1 : 0, 0.5f * animSpeed).SetEase(Ease.OutBounce).OnComplete(()=>GameManager.Instance.InputController.InputModeType = InputModeType.Gameplay);
+        menu.DOScale(visibility ? 1 : 0, 0.5f * animSpeed).SetEase(Ease.OutBounce).OnComplete(()=>GameManager.Instance.InputController.InputModeType = visibility ? InputModeType.UI : InputModeType.Gameplay);
     }
 
-    public void HideMenuButton()
+    public void ContinueMenuButton()
     {
         SetMenuVisibility(false);
+    }
+
+    public void ExitMenuButton()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }

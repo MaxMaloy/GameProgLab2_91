@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.LoadStaringScene();
-        //UIController.SetHudVisibility(true);
+        UIController.SetHudVisibility(true);
     }
 
     void Update()
