@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RectTransform escContainer;
     [SerializeField] private RectTransform menu;
     [SerializeField] private RectTransform loosePopup;
+    [SerializeField] private Button loosePopupWatchAdBtn;
     [SerializeField] private TMPro.TextMeshProUGUI coins;
     private bool isMenuVisible = true;
 
@@ -49,6 +50,10 @@ public class UIController : MonoBehaviour
 
     public void SetLoosePopupVisibility(bool visibility, float animSpeed = 1)
     {
+        if (visibility)
+        {
+            loosePopupWatchAdBtn.interactable = GameManager.Instance.Ads.isAdLoaded;
+        }
         SetHudVisibility(!visibility, .5f);
         GameManager.Instance.InputController.InputModeType = InputModeType.Blocked;
         loosePopup.DOScale(visibility ? 1 : 0, 0.5f * animSpeed).SetEase(Ease.OutBounce).OnComplete(() => GameManager.Instance.InputController.InputModeType = visibility ? InputModeType.UI : InputModeType.Gameplay);
@@ -83,6 +88,8 @@ public class UIController : MonoBehaviour
     public void OnLooseWatchAd()
     {
         SetLoosePopupVisibility(false, 0);
+        GameManager.Instance.Ads.ShowAd();
+        
     }
 
     public void OnLooseFromBeginning()

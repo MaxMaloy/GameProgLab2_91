@@ -2095,7 +2095,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1114842185}
   m_OnClick:
     m_PersistentCalls:
@@ -2161,6 +2161,7 @@ GameObject:
   - component: {fileID: 1119881161}
   - component: {fileID: 1119881160}
   - component: {fileID: 1119881162}
+  - component: {fileID: 1119881163}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2215,6 +2216,18 @@ MonoBehaviour:
   - level2
   - level3
   currentScene: 
+--- !u!114 &1119881163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119881159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7d58370e5e7b240ad72e27ab7e63b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1164167269
 GameObject:
   m_ObjectHideFlags: 0

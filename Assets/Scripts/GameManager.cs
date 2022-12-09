@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public InputController InputController { get; private set; }
     public GameSceneManager SceneManager { get; private set; }
     public UIController UIController { get => uiController; }
+    public InterstitialAd Ads { get; private set; }
 
     private int livesCount = 3;
     public int LivesCount
@@ -63,9 +64,10 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        Ads = GetComponent<InterstitialAd>();
         InputController = new InputController();
         SceneManager = GetComponent<GameSceneManager>();
+        Ads.OnAdsShowComplete += SceneManager.ReloadScene;
     }
 
     private void Start()
