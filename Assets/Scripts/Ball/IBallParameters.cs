@@ -20,7 +20,7 @@ public interface IBallParameters
 public class WoodenBallParameters : IBallParameters
 {
     private BallType type = BallType.wooden;
-    private float moveForce = 5;
+    private float moveForce = 7;
     private float jumpForce = 2;
     private float mass = 1;
 
@@ -39,7 +39,7 @@ public class WoodenBallParameters : IBallParameters
 public class StoneBallParameters : IBallParameters
 {
     private BallType type = BallType.stone;
-    private float moveForce = 10;
+    private float moveForce = 13;
     private float jumpForce = 0;
     private float mass = 4;
     public BallType Type { get => type; set => type = value; }
