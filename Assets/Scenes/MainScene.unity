@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c94a4ca3cfd564c92ceb62c8b6ab6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSceneIndex: 2
+  startSceneIndex: 0
   scenes:
   - level1
   - level2
